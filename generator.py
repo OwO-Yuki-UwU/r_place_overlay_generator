@@ -21,58 +21,46 @@ overlay_img.paste(place_img, (image_place_location_x * 3, image_place_location_y
 new_image_place_location_x = image_place_location_x * 3
 new_image_place_location_y = image_place_location_y * 3
 
-y = new_image_place_location_y
-if new_image_place_location_y == 0:
-    # Remove first line
-    x = new_image_place_location_x
-    while x < image_place_location_x + place_img.width:
-        overlay_img.putpixel((x, y), (0, 0, 0, 0))
-        x += 1
-
 # Remove other lines
 x = new_image_place_location_x
-if new_image_place_location_y == 0:
-    y += 2
+y = new_image_place_location_y
+first_remove = True
 while y < new_image_place_location_y + place_img.height:
     while x < new_image_place_location_x + place_img.width: # Remove line
         overlay_img.putpixel((x, y), (0, 0, 0, 0))
         x += 1
 
-    x = new_image_place_location_x
-    y += 1
+    if first_remove == False:
+        x = new_image_place_location_x
+        y += 1
 
-    while x < new_image_place_location_x + place_img.width: # Remove line
-        overlay_img.putpixel((x, y), (0, 0, 0, 0))
-        x += 1
+        while x < new_image_place_location_x + place_img.width: # Remove line
+            overlay_img.putpixel((x, y), (0, 0, 0, 0))
+            x += 1
 
     x = new_image_place_location_x
     y += 2
-
-x = new_image_place_location_x
-if new_image_place_location_x == 0:
-    # Remove first column
-    y = new_image_place_location_y
-    while y < canvas_height:
-        overlay_img.putpixel((x, y), (0, 0, 0, 0))
-        y += 1
+    first_remove = False
 
 # Remove other collumns
 y = new_image_place_location_y
-if new_image_place_location_x == 0:
-    x += 2
+x = new_image_place_location_x
+first_remove = True
 while x < new_image_place_location_x + place_img.width:
     while y < new_image_place_location_y + place_img.height: # Remove collumns
         overlay_img.putpixel((x, y), (0, 0, 0, 0))
         y += 1
 
-    y = new_image_place_location_y
-    x += 1
+    if first_remove == False:
+        y = new_image_place_location_y
+        x += 1
 
-    while y < new_image_place_location_y + place_img.height: # Remove collumns
-        overlay_img.putpixel((x, y), (0, 0, 0, 0))
-        y += 1
+        while y < new_image_place_location_y + place_img.height: # Remove collumns
+            overlay_img.putpixel((x, y), (0, 0, 0, 0))
+            y += 1
 
     y = new_image_place_location_y
     x += 2
+    first_remove = False
 
 overlay_img.save(output_overlay_image_name)
